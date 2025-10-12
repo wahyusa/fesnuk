@@ -1,38 +1,30 @@
-# sv
+# Fesnuk
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+PT Fesnuk Rajin Skrol
 
-## Creating a project
+## Basic Installation
 
-If you're seeing this, you've probably already done this step. Congrats!
+```bash
+# Clone this repo
+`git clone https://github.com/wahyusa/fesnuk`
 
-```sh
-# create a new project in the current directory
-npx sv create
+# Install dependencies
+`npm i`
 
-# create a new project in my-app
-npx sv create my-app
+# Run on local environment
+`npm run dev`
+
+# Deploy to Cloudflare Worker
+`npm run deploy`
 ```
 
-## Developing
+## Techstack
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- TypeScript
+- SvelteKit
+- Tailwind CSS with plugin forms and typography
+- Eslint
+- Prettier
+- Svelte adapter cloudflare
+- Vite
+- Wrangler (Cloudflare)
