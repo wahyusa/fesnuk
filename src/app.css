@@ -1,10 +1,13 @@
 @import '@fontsource/architects-daughter';
+@import '@fontsource-variable/geist';
+
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
 @theme {
     --font-sketch: "Architects Daughter";
+    --font-sans: 'Geist Variable', sans-serif;
 }
 
 body {
