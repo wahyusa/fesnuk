@@ -12,3 +12,4 @@
 
 <time>{date}</time>
 <h1>Fesnuk</h1>
+<a href="#!" aria-label="Link to development version preview of this website">View dev version</a>
