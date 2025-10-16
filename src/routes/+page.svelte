@@ -96,6 +96,74 @@
 	</button>
 </header>
 
+<header id="hero" class="flex flex-1 items-center justify-center py-16 md:px-10">
+	<div class="flex flex-1 items-center justify-center py-16 md:px-10">
+		<div class="w-full max-w-5xl">
+			<div class="@container">
+				<div class="grid grid-cols-1 gap-12 @[768px]:grid-cols-2 @[768px]:items-center">
+					<div class="relative flex flex-col gap-6 px-6 text-center @[768px]:text-left">
+						<h1
+							class="text-primary text-5xl font-bold tracking-tighter @[480px]:text-6xl dark:text-white"
+						>
+							Still Unemployed?
+						</h1>
+						<p
+							class="absolute top-2 -left-4 -rotate-[25deg] transform font-sketch text-xs dark:text-white"
+						>
+							yep, this is the headline
+						</p>
+						<p class="text-primary/70 text-xl dark:text-white/70">
+							You coded all night, mastered algorithms, and your GitHub is a masterpiece. So why are
+							you still watching Netflix in your parents' basement? <span
+								class="text-primary font-sketch font-bold dark:text-white">Stop the pain.</span
+							>
+						</p>
+						<button
+							class="border-primary text-primary relative mt-4 self-center border-2 bg-transparent px-8 py-3 text-lg font-bold @[768px]:self-start dark:border-white dark:text-white"
+							>Enroll Now (or Don't)</button
+						>
+						<p
+							class="absolute bottom-2 left-1/2 -translate-x-1/2 rotate-12 transform font-sketch text-xs @[768px]:left-32 dark:text-white"
+						>
+							your call, buddy
+						</p>
+						<p
+							class="absolute -bottom-8 left-1/2 -translate-x-1/2 rotate-[-10deg] transform font-sketch text-xs text-red-500 @[768px]:left-48"
+						>
+							price goes up tomorrow... maybe.
+						</p>
+					</div>
+					<div
+						class="border-primary relative h-80 w-full border-2 @[768px]:h-full dark:border-white"
+					>
+						<p
+							class="absolute -top-3 left-4 rotate-[-5deg] transform font-sketch text-xs dark:text-white"
+						>
+							some "art" here
+						</p>
+						<div class="absolute inset-0 flex h-full w-full items-center justify-center">
+							<svg
+								class="text-primary/30 h-1/2 w-1/2 dark:text-white/30"
+								fill="none"
+								viewBox="0 0 100 100"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<line stroke="currentColor" stroke-width="2" x1="0" x2="100" y1="0" y2="100"></line>
+								<line stroke="currentColor" stroke-width="2" x1="100" x2="0" y1="0" y2="100"></line>
+							</svg>
+						</div>
+						<p
+							class="absolute right-6 -bottom-5 rotate-[20deg] transform font-sketch text-xs dark:text-white"
+						>
+							deep, right?
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
 <main class="px-10">
 	<section id="background">
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit id eos ab quod at odio
