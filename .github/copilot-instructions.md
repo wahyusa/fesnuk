@@ -2,67 +2,78 @@ This repository uses SvelteKit + Tailwind + Cloudflare Workers (wrangler). The i
 
 Keep this short, actionable, and specific to the project conventions.
 
-1) Big picture (what this repo is and runtime)
+1. Big picture (what this repo is and runtime)
+
 - This is a SvelteKit app (Svelte 5) built to run as a Cloudflare Worker using @sveltejs/adapter-cloudflare. The worker entry is produced under `.svelte-kit/cloudflare` and wrangler.jsonc configures deployment.
 - Frontend UI lives under `src/routes` (page components) and shared primitives / UI live under `src/lib` (see `src/lib/components/ui/*`). Assets are in `src/lib/assets`.
 
-2) Important files and commands
+2. Important files and commands
+
 - Dev server: `npm run dev` (starts Vite + SvelteKit dev). Build: `npm run build`. Preview (local Cloudflare worker dev): `npm run preview`.
 - Deploy to Cloudflare: `npm run deploy` (runs `vite build` then `wrangler deploy`). Wrangler config: `wrangler.jsonc`.
 - Type checking / lint: `npm run check`, `npm run lint`, `npm run format`.
 
-3) Project-specific patterns and conventions
+3. Project-specific patterns and conventions
+
 - TypeScript + SvelteKit: prefer `lang="ts"` in Svelte files. Top-level imports often use the `$lib` alias (e.g. `import * as Carousel from '$lib/components/ui/carousel/index.js'`). Use .js imports in some components (the project compiles TS -> JS for Svelte runtime bundles).
 - UI primitives: `src/lib/components/ui` contains building-block components (button, carousel). These use `tailwind-variants` for variant systems (see `button.svelte` and the `buttonVariants` tv config). When changing styles, update the tv config and class usage.
 - CSS utilities: `src/lib/utils.ts` exports `cn(...)` (clsx + twMerge) for merging classes. Use it to compose Tailwind classes.
 - Assets: static imagery is stored under `src/lib/assets` and imported directly in components (Vite handles bundling).
 
-4) Code structure notes that matter for automation
+4. Code structure notes that matter for automation
+
 - Routes: `src/routes` follow SvelteKit conventions. Server-only logic (load, actions) lives in `+page.server.ts` next to `+page.svelte` when present.
 - Module vs instance script in Svelte components: some components use `script lang="ts" module` for module-level exports (see `src/lib/components/ui/button/button.svelte`). Preserve `export` semantics when refactoring.
 - Packaged build target: Cloudflare Worker bundle requires adapter-cloudflare; changes that affect SSR/output should be validated with `npm run build` and `npm run preview`.
 
-5) Tests, type checks and quick validation
+5. Tests, type checks and quick validation
+
 - There are no unit tests in the repo. Minimum validation for PRs: run `npm run check` and `npm run build` (or `npm run preview` for runtime smoke). After codegen, run the linter `npm run lint` and `npm run format`.
 
-6) Typical small tasks and how to do them safely
+6. Typical small tasks and how to do them safely
+
 - Add a new UI component: place files under `src/lib/components/ui/<name>/`, export an `index.ts` that re-exports the component, import via `$lib/components/ui/<name>` in routes.
 - Modify route UI only: edit `src/routes/.../+page.svelte`. Preserve `script` module exports and server-side files (`+page.server.ts`) if present.
 - Update Cloudflare bindings or worker config: edit `wrangler.jsonc` and run `npm run preview` to validate locally.
 
-7) Examples to copy when generating code
+7. Examples to copy when generating code
+
 - Use `cn(...)` from `src/lib/utils.ts` for class merging.
 - Follow `button.svelte` for a canonical accessible button: tv-based variants, `href` fallback, `bind:this={ref}` pattern.
 - For carousels, re-use `src/lib/components/ui/carousel/*` API: `Carousel.Root`, `Carousel.Content`, `Carousel.Item` and pass `plugins` like Autoplay.
 
-8) Security / secrets / env
+8. Security / secrets / env
+
 - Do not add secrets to source. Wrangler secrets and environment variables belong in wrangler or Cloudflare. `wrangler.jsonc` may reference bindings; keep secrets out of the repo.
 
-9) When creating PRs as an agent
+9. When creating PRs as an agent
+
 - Keep changes small and focused. Run `npm run check` and `npm run build` before proposing changes. Mention any runtime implications (SSR, Cloudflare bundle size). If adding dependencies, update package.json deps and keep devDependencies vs dependencies correct.
 
 If anything above is unclear or you need more detail about any area (build steps, deploy, component contracts), tell me which file or behavior you want expanded and I will add it.
 
 ## MCP Svelte (mcp_svelte-mcp) tools
+
 These helper tools provide authoritative Svelte 5 / SvelteKit documentation and automated Svelte code checks. Use them when you need Svelte-specific guidance or to validate generated components.
 
 - `mcp_svelte-mcp_list-sections`
-	- What: Returns a catalog of Svelte 5 / SvelteKit documentation sections (title, use_cases, path).
-	- When to use: Run this first for any Svelte docs request — it helps pick which docs sections to fetch.
+  - What: Returns a catalog of Svelte 5 / SvelteKit documentation sections (title, use_cases, path).
+  - When to use: Run this first for any Svelte docs request — it helps pick which docs sections to fetch.
 
 - `mcp_svelte-mcp_get-documentation`
-	- What: Fetches the full content of one or more Svelte 5 / SvelteKit documentation sections.
-	- When to use: After `list-sections`, request the specific section(s) you need (e.g., `$state`, `load functions`, `routing`).
+  - What: Fetches the full content of one or more Svelte 5 / SvelteKit documentation sections.
+  - When to use: After `list-sections`, request the specific section(s) you need (e.g., `$state`, `load functions`, `routing`).
 
 - `mcp_svelte-mcp_svelte-autofixer`
-	- What: Analyzes a Svelte component/module and returns suggestions/fixes to align with Svelte 5 conventions used by this project.
-	- When to use: MUST be used whenever you ask to write Svelte code — run it on the final component before returning code to the user. Provide the component source and desired Svelte version (default: 5).
+  - What: Analyzes a Svelte component/module and returns suggestions/fixes to align with Svelte 5 conventions used by this project.
+  - When to use: MUST be used whenever you ask to write Svelte code — run it on the final component before returning code to the user. Provide the component source and desired Svelte version (default: 5).
 
 - `mcp_svelte-mcp_playground-link`
-	- What: Generates a Svelte REPL/Playground link for a Svelte snippet (indicate Tailwind usage if applicable).
-	- When to use: Offer this after producing a final snippet for quick user testing. Do NOT use this if the component was written directly into the repo files (the tool expects standalone snippets).
+  - What: Generates a Svelte REPL/Playground link for a Svelte snippet (indicate Tailwind usage if applicable).
+  - When to use: Offer this after producing a final snippet for quick user testing. Do NOT use this if the component was written directly into the repo files (the tool expects standalone snippets).
 
 Quick rules:
+
 - Always follow: `mcp_svelte-mcp_list-sections` -> choose sections -> `mcp_svelte-mcp_get-documentation`.
 - Run `mcp_svelte-mcp_svelte-autofixer` on any Svelte component before presenting it to the user.
 - Use the playground-link tool only for standalone snippets, not for code already written into the repo.
